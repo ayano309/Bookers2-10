@@ -9,7 +9,7 @@
       <th>Opinion</th>
       <th></th>
       <th></th>
-      <th colspan="１"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +24,10 @@
         </div>
       </td>
       <td>
-        <p>コメント数：<%= @book.comments.count %></p>
+        <p>コメント数：<%= book.comments.count %></p>
+      </td>
+      <td width="180px">
+        <%= render 'commons/raty', book: book %>
       </td>
     </tr>
     <% end %>
@@ -33,4 +36,3 @@
 </div>
 </div>
 </div>
-    
