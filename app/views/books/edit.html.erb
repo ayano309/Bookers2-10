@@ -27,6 +27,9 @@
         <%= f.label :body, 'Opinion' %>
         <%= f.text_area :body,class: "form-control" %>
       </div>
+      
+      <%= render 'commons/raty', book: @book %>
+       
       <%= f.submit 'Update Book', class: "btn btn-success"%>
       
     <% end %>
