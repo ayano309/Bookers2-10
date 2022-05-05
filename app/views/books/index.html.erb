@@ -1,6 +1,11 @@
 <%= render 'commons/common', book: @book, user: @user %>
 <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
+      <p>
+        <%=link_to '新しい順', books_path(latest: "true") %>|
+        <%=link_to '古い順', books_path(old: "true")%>|
+        <%= link_to '評価の高い順',books_path(star_count: "true") %>
+      </p>
       <table class="table table-hover table-inverse">
   <thead>
     <tr>
@@ -23,6 +28,7 @@
           <%= render 'favorites/favorite', book: book %>
         </div>
       </td>
+      <td><%= l book.created_at %></td>
       <td>
         <p>コメント数：<%= book.comments.count %></p>
       </td>

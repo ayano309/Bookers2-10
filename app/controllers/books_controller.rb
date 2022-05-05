@@ -3,7 +3,17 @@ class BooksController < ApplicationController
    before_action :correct_user, only:[:edit, :update]
    
   def index
-    @books = Book.all
+   
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+    elsif params[:star_count]
+      @books = Book.star_count
+    else
+      @books = Book.all
+    end
+    
     @book = Book.new
     @user = current_user
   end
@@ -14,10 +24,6 @@ class BooksController < ApplicationController
     @newbook = Book.new
     @comment = Comment.new
     @comments = @book.comments
-  end
-  
-  def new
-    
   end
   
   def create
