@@ -1,0 +1,28 @@
+<% books.each do |book|%>
+    <tr>
+      <td><%= link_to image_tag(book.user.get_profile_image(100,100)),user_path(book.user_id) %></td>
+      <td><%= link_to book.title, book_path(book) %></td>
+      <td><%= book.body%></td>
+
+      <td>
+        <% book.tags.each do |tag| %>
+          <li style="list-style: none;">
+            <%= link_to tag.name, search_path(word: tag.name, range:"Tag", search:"perfect_match") %>
+          </li>
+        <% end %>
+      </td>
+
+      <td>
+        <div id = "index_like_<%= book.id %>">
+          <%= render 'favorites/favorite', book: book %>
+        </div>
+      </td>
+      <td><%= l book.created_at %></td>
+      <td>
+        <p>コメント数：<%= book.comments.count %></p>
+      </td>
+      <td width="180px">
+        <%= render 'commons/raty', book: book %>
+      </td>
+    </tr>
+  <% end %>
