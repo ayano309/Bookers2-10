@@ -16,6 +16,7 @@ class BooksController < ApplicationController
     
     @book = Book.new
     @user = current_user
+    
   end
 
   def show
@@ -28,7 +29,10 @@ class BooksController < ApplicationController
   
   def create
     @book = current_user.books.build(book_params)
+     # 受け取った値を,で区切って配列にする
+    tag_list = params[:book][:name].split(',')
     if @book.save
+       @book.save_tag(tag_list)
       redirect_to book_path(@book), notice: 'You have created book successfully.'
     else
       @books = Book.all
@@ -61,6 +65,7 @@ class BooksController < ApplicationController
   end
   
   private 
+  
   def book_params
     params.require(:book).permit(:title,:body,:rate)
     
